@@ -1,0 +1,37 @@
+<p style="color: green"><%= notice %></p>
+
+<ul>
+
+  <% @event.each do |item| %>
+
+    <li class="mt-3">
+      Summary :
+      <%=  item.summary %>
+    </li>
+    <li>
+      Description : 
+      <%=  item.description %>
+    </li>
+    <li>
+      Start Time : 
+      <%=  item.dtstart.strftime('%A, %B %d, %Y at %I:%M %p') %>
+    </li>
+    <li>
+      End Time :
+      <%=  item.dtend.strftime('%A, %B %d, %Y at %I:%M %p') %>
+    </li>
+    <li>
+      Created At :     <%=  item.dtstamp %>
+    </li>
+    <li>
+      Location :     <%=  item.location %>
+    </li>
+    <li>
+      ID :    <%=  item.uid %>
+    </li>
+    <ul>
+    <% end %>
+    <div>
+      <%= link_to "Calendar", '../' %> 
+      <%= button_to "Destroy this event", @event[0].uid, method: :delete %>
+    </div>
