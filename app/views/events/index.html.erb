@@ -3,43 +3,12 @@
 <h1>Events</h1>
 
 <div id="events">
-<%if @events%>
+  <% @events.each do |event| %>
+    <%= render event %>
+    <p>
+      <%= link_to "Show this event", event %>
+    </p>
+  <% end %>
+</div>
 
-  <ul>
-    <% @events.each do |event| %>
-      <li class="mt-3 summary">
-        Summary :
-        <%=  event.summary %>
-      </li>
-      <li class="description">
-        Description : 
-        <%=  event.description %>
-      </li>
-      <li class="dtstart">
-        Start Time : 
-        <%=  event.dtstart.strftime('%A, %B %d, %Y at %I:%M %p') %>
-      </li>
-      <li class="dtend">
-        End Time :
-        <%=  event.dtend.strftime('%A, %B %d, %Y at %I:%M %p') %>
-      </li>
-      <li>
-        Created At :     <%=  event.dtstamp %>
-      </li>
-      <li class="location">
-        Location :     <%=  event.location %>
-      </li>
-      <li>
-        ID :    <%=  event.uid %>
-      </li>
-      <%= link_to "Events Details", "events/#{event.uid}" %>
-
-    <% end %>
-    <ul>
-<%end %>
-    </div>
-
-    <div class="d-flex gap-4 m-3">
-      <%= link_to "Calendar", './' %> 
-      <%= link_to "New event", new_event_path %>
-    </div>
+<%= link_to "New event", new_event_path %>

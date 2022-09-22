@@ -35,8 +35,16 @@
     <%= form.label :location, style: "display: block" %>
     <%= form.text_field :location %>
   </div>
-
   <div>
+    <%= form.label :uid, style: "display: none"  %>
+    <%= form.text_field :uid, style: "display: none", value:"" %>
+  </div>
+  <div>
+    <%= form.label :calendar_id, style: "display: none" %>
+    <%= form.text_field :calendar_id,  style:"display: none", value:params[:id]  %>
+  </div>
+
+  <div class="mt-2">
     <%= form.submit %>
   </div>
 <% end %>

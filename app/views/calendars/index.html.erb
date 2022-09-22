@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<div id="calendars">
+  <div class="container mt-5  text-center">
+    <h1>Calendars</h1>
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <% @calendars.each do |calendar| %>
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%=  calendar.name %></h5>
+          <a href="#" class="card-link">        <%= link_to "Show this calendar", calendar %>
+          </a>
+        </div>
+      </div>
+      <p>
+      </p>
+    <% end %>
+    </div>
+    <%= link_to "New calendar", new_calendar_path %>
+  </div>
+
+</div>

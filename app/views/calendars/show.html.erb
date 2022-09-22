@@ -1,0 +1,49 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container mt-5 text-center">
+
+  <h1 class="my-5"> Calendar <% @calendar[:Name] %> </h1>
+  <% if @events %>
+    <%= month_calendar(events: @events,attribute: :start, end_attribute: :end) do |date, events| %>
+      <div class="day">
+        <%= date.strftime('%d') %>
+      </div>
+      <% events.each do |event| %>
+        <div class="border my-3">
+          <div class="card-header ">
+            <h6 class="card-title">
+              <% event.start.strftime('%A, %B %d, %Y at %I:%M %p') %>
+              <%= link_to event.title, "../events/#{event.id}" %>
+            </h6>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              <%= event.description %>
+            </p>
+          </div>
+          <div class="card-footer">
+            <p class="card-text">
+              Location: <%= event.location %>
+            </p>
+
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= month_calendar() do |date| %>
+      <div class="day">
+        <%= date.strftime('%d') %>
+      </div>
+    <%end %>
+  <%end %>
+
+  <%= link_to "Create New Event", "../events/new?id=#{@calendar.id}" %>
+
+  <div class="my-5">
+    <%= link_to "Edit this calendar", edit_calendar_path(@calendar) %> |
+    <%= link_to "Back to calendars", calendars_path %>
+
+  </div>
+    <%= button_to "Remove this calendar", @calendar, method: :delete %>
+</div>

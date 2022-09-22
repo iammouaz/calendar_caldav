@@ -20,7 +20,6 @@ module Services
       response = @cal.find_events(params)
       if response
         response.map { |event| OpenStruct.new(event.properties) }
-
       else
         response end
     end
