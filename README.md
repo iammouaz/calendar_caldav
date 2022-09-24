@@ -6,6 +6,7 @@
 
 - Ruby on Rails
 - [Twisted-caldav](https://github.com/int2root/twisted-caldav)
+
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
@@ -39,14 +40,16 @@ rspec spec/
 
 ### Usage
 
-- First you need to add CalDav server credentials at "config/constants.rb"
 - Once you clone the repository:
 
+cd calendar_caldav
 
+If you don't have already exitsing caldav server running :
+- Make sure that you have python enviromint on you machine 
+- Run `radicale` as root privilege to run the caldav server
+- In new terminal run the following commands :  
 
 ```
-
-cd calendar_caldav
 
 bundle i
 
