@@ -46,7 +46,7 @@ cd calendar_caldav
 
 If you don't have already exitsing caldav server running :
 - Make sure that you have python enviromint on you machine 
-- Run `radicale` as root privilege to run the caldav server
+- Run `python server/radicale.py` as root privilege to run the caldav server
 - In new terminal run the following commands :  
 
 ```
