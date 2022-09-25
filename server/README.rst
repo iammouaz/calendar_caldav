@@ -1,8 +1,0 @@
-=========
- Read Me
-=========
-
-Radicale is a free and open-source CalDAV and CardDAV server.
-
-For the complete documentation, please visit `Radicale "1.1" documentation
-<https://radicale.org/1.1.html>`_.
