@@ -94,7 +94,9 @@ GEM
       activesupport (>= 5.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
-    icalendar (1.5.4)
+    icalendar (2.8.0)
+      ice_cube (~> 0.16)
+    ice_cube (0.16.4)
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -107,8 +109,6 @@ GEM
     loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    macaddr (1.7.2)
-      systemu (~> 2.6.5)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
@@ -117,7 +117,6 @@ GEM
     mini_mime (1.1.2)
     minitest (5.16.3)
     msgpack (1.5.6)
-    net-http-digest_auth (1.4.1)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -210,22 +209,14 @@ GEM
     stimulus-rails (1.1.0)
       railties (>= 6.0.0)
     strscan (3.0.4)
-    systemu (2.6.5)
     thor (1.2.1)
     timeout (0.3.0)
     turbo-rails (1.1.1)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
-    twisted-caldav (0.0.0.2)
-      builder (~> 3.x)
-      icalendar (~> 1.x)
-      net-http-digest_auth (~> 1.x)
-      uuid (~> 2.x)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
-    uuid (2.3.9)
-      macaddr (~> 1.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -250,6 +241,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
+  icalendar (~> 2.3)
   importmap-rails
   jbuilder
   ostruct (~> 0.1.0)
@@ -262,7 +254,6 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   turbo-rails
-  twisted-caldav
   tzinfo-data
   web-console
   webdrivers
