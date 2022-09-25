@@ -37,13 +37,16 @@
       </div>
     <%end %>
   <%end %>
-
-  <%= link_to "Create New Event", "../events/new?id=#{@calendar.id}" %>
-
+  <div class="d-flex gap-5 justify-content-center align-items-center">
+    <%= link_to "Create New Event", "../events/new?id=#{@calendar.id}" %>
+    <%= link_to "Download Offline ICS",  "data:text/calendar;charset=utf8,#{@ical_ics}" ,  :format => :ics %>
+  </div>
+  <p class="mt-5">Calendar ICS Link</p>
+  <code><%=  "#{@str}/ics/#{@calendar.id}.ics" %></code>
   <div class="my-5">
     <%= link_to "Edit this calendar", edit_calendar_path(@calendar) %> |
     <%= link_to "Back to calendars", calendars_path %>
-
   </div>
-    <%= button_to "Remove this calendar", @calendar, method: :delete %>
+
+  <%= button_to "Remove this calendar", @calendar, method: :delete %>
 </div>

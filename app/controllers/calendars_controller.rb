@@ -1,4 +1,4 @@
-require_relative '../services/caldav_service'
+require_relative '../services/icalendar_service'
 
 class CalendarsController < ApplicationController
   before_action :set_calendar, only: %i[show edit update destroy]
@@ -9,7 +9,14 @@ class CalendarsController < ApplicationController
   end
 
   # GET /calendars/1 or /calendars/1.json
-  def show; end
+  def show
+    events = Event.where(calendar_id: params[:id])
+    @cal = Icalendar::IcalendarService.new
+    @ical_ics = @cal.generate_ical(events)
+    url = request.original_url
+    @str = url[0...-12]
+    update_ics()
+  end
 
   # GET /calendars/new
   def new
@@ -22,7 +29,7 @@ class CalendarsController < ApplicationController
   # POST /calendars or /calendars.json
   def create
     @calendar = Calendar.new(calendar_params)
-
+    update_ics()
     respond_to do |format|
       if @calendar.save
         format.html { redirect_to calendar_url(@calendar), notice: 'Calendar was successfully created.' }
@@ -68,5 +75,12 @@ class CalendarsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def calendar_params
     params.require(:calendar).permit(:name, :password)
+  end
+
+  def update_ics
+    events = Event.where(calendar_id: params[:id])
+    @cal = Icalendar::IcalendarService.new
+    @ical_ics = @cal.generate_ical(events)
+    File.write("public/ics/#{params[:id]}.ics", @ical_ics)
   end
 end

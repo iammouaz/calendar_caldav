@@ -1,5 +1,3 @@
-require_relative '../services/caldav_service'
-
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
 
@@ -22,12 +20,8 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @calendar = Calendar.find(event_params['calendar_id'])
-    @cal = Services::CaldavService.new(@calendar.name, @calendar.password)
-    @caldav_event = @cal.create(event_params)
-    if @caldav_event
-      @new_params = event_params.merge({ uid: @caldav_event.uid })
-      @event = Event.new(@new_params)
-    end
+    @new_params = event_params.merge({ uid: SecureRandom.uuid })
+    @event = Event.new(@new_params)
     respond_to do |format|
       if @event.save
         format.html { redirect_to event_url(@event), notice: 'Event was successfully created.' }
@@ -54,14 +48,7 @@ class EventsController < ApplicationController
 
   # DELETE /events/1 or /events/1.json
   def destroy
-    @calendar = Calendar.find(@event['calendar_id'])
-    @cal = Services::CaldavService.new(@calendar.name, @calendar.password)
-    @destroyed = @cal.delete(@event.uid)
-    @event.destroy if @destroyed
-    respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @event.destroy
   end
 
   private
