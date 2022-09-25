@@ -1,11 +1,11 @@
 # Calendar CalDav
 
-> This repo contains Calender app integrated with [CalDAV](https://en.wikipedia.org/wiki/CalDAV) Server
+> This repo contains Calender app integrated with [CalDAV](https://en.wikipedia.org/wiki/CalDAV)
 
 ## Built With
 
 - Ruby on Rails
-- [Twisted-caldav](https://github.com/int2root/twisted-caldav)
+- [ICalendar](https://github.com/icalendar/icalendar)
 
 ## Getting Started
 
@@ -43,11 +43,6 @@ rspec spec/
 - Once you clone the repository:
 
 cd calendar_caldav
-
-If you don't have already exitsing caldav server running :
-- Make sure that you have python enviromint on you machine 
-- Run `python server/radicale.py` as root privilege to run the caldav server
-- In new terminal run the following commands :  
 
 ```
 
