@@ -1,23 +1,24 @@
 <p style="color: green"><%= notice %></p>
 <div class="container mt-5 ">
-<div class="card text-center">
-  <div class="card-body">
-    <h5 class="card-title">    <%=  @event.title %>
-    </h5>
-        <h5 class="card-title">    <%=  @event.uid %>
-    </h5>
-    <p class="card-text">    <%=  @event.description %>
-    </p>
-    <p class="card-text">       <%=  @event.start.strftime('%A, %B %d, %Y at %I:%M %p') %>
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">    <%=  @event.title %>
+      </h5>
+      <h5 class="card-title">    <%=  @event.uid %>
+      </h5>
+      <p class="card-text">    <%=  @event.description %>
+      </p>
+      <p class="card-text">       <%=  @event.start.strftime('%A, %B %d, %Y at %I:%M %p') %>
 
-    </p>
-    <p class="card-text">     <%=  @event.end.strftime('%A, %B %d, %Y at %I:%M %p') %>
-    </p>
-    <p class="card-text">      <%=  @event.location %>
-    </p>
-   <%= link_to "Calendar", "../calendars/#{@event.calendar_id}" %>
-   
-<%= button_to "Destroy this event", @events, method: :delete %>
+      </p>
+      <p class="card-text">     <%=  @event.end.strftime('%A, %B %d, %Y at %I:%M %p') %>
+      </p>
+      <p class="card-text">      <%=  @event.location %>
+      </p>
+      <%= link_to "Calendar", "../calendars/#{@event.calendar_id}" %>|
+      <%= link_to "Edit this event", "#{edit_event_path(@event)}?calendar=#{@event.calendar_id}" %>
+
+      <%= button_to "Destroy this event", @events, method: :delete %>
+    </div>
   </div>
-</div>
 </div>

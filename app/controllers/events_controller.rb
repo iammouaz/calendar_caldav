@@ -1,3 +1,5 @@
+require_relative '../services/icalendar_service'
+
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
 
@@ -24,7 +26,7 @@ class EventsController < ApplicationController
     @event = Event.new(@new_params)
     respond_to do |format|
       if @event.save
-        format.html { redirect_to event_url(@event), notice: 'Event was successfully created.' }
+        format.html { redirect_to "/calendars/#{@calendar.id}", notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -37,7 +39,8 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to event_url(@event), notice: 'Event was successfully updated.' }
+        update_ics
+        format.html { redirect_to "/calendars/#{event_params['calendar_id']}", notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -49,6 +52,7 @@ class EventsController < ApplicationController
   # DELETE /events/1 or /events/1.json
   def destroy
     @event.destroy
+    redirect_to '/calendars'
   end
 
   private
@@ -61,5 +65,12 @@ class EventsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def event_params
     params.require(:event).permit(:title, :description, :start, :end, :location, :uid, :calendar_id)
+  end
+
+  def update_ics
+    events = Event.where(calendar_id: params[:id])
+    @cal = Icalendar::IcalendarService.new
+    @ical_ics = @cal.generate_ical(events)
+    File.write("public/ics/#{params[:id]}.ics", @ical_ics)
   end
 end

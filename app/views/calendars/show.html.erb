@@ -38,7 +38,7 @@
     <%end %>
   <%end %>
   <div class="d-flex gap-5 justify-content-center align-items-center">
-    <%= link_to "Create New Event", "../events/new?id=#{@calendar.id}" %>
+    <%= link_to "Create New Event", "../events/new?calendar=#{@calendar.id}" %>
     <%= link_to "Download Offline ICS",  "data:text/calendar;charset=utf8,#{@ical_ics}" ,  :format => :ics %>
   </div>
   <p class="mt-5">Calendar ICS Link</p>

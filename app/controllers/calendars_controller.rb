@@ -15,7 +15,7 @@ class CalendarsController < ApplicationController
     @ical_ics = @cal.generate_ical(events)
     url = request.original_url
     @str = url[0...-12]
-    update_ics()
+    update_ics
   end
 
   # GET /calendars/new
@@ -29,7 +29,6 @@ class CalendarsController < ApplicationController
   # POST /calendars or /calendars.json
   def create
     @calendar = Calendar.new(calendar_params)
-    update_ics()
     respond_to do |format|
       if @calendar.save
         format.html { redirect_to calendar_url(@calendar), notice: 'Calendar was successfully created.' }
@@ -43,6 +42,7 @@ class CalendarsController < ApplicationController
 
   # PATCH/PUT /calendars/1 or /calendars/1.json
   def update
+    update_ics
     respond_to do |format|
       if @calendar.update(calendar_params)
         format.html { redirect_to calendar_url(@calendar), notice: 'Calendar was successfully updated.' }
@@ -57,11 +57,11 @@ class CalendarsController < ApplicationController
   # DELETE /calendars/1 or /calendars/1.json
   def destroy
     @calendar.destroy
-
     respond_to do |format|
       format.html { redirect_to calendars_url, notice: 'Calendar was successfully destroyed.' }
       format.json { head :no_content }
     end
+    delete_ics()
   end
 
   private
@@ -82,5 +82,9 @@ class CalendarsController < ApplicationController
     @cal = Icalendar::IcalendarService.new
     @ical_ics = @cal.generate_ical(events)
     File.write("public/ics/#{params[:id]}.ics", @ical_ics)
+  end
+
+  def delete_ics
+    File.delete("public/ics/#{params[:id]}.ics")
   end
 end
