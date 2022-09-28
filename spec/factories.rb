@@ -12,4 +12,13 @@ FactoryBot.define do
     location { 'Italy' }
     calendar
   end
+
+  factory :event2 do
+    title { 'New Meeting 2' }
+    description { 'New Meeting descripton 2' }
+    start_date { '2022-09-20 12:12:00 UTC' }
+    end_date { '2022-09-20 13:00:00 UTC' }
+    location { 'France' }
+    calendar
+  end
 end
