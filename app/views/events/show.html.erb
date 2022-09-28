@@ -4,14 +4,12 @@
     <div class="card-body">
       <h5 class="card-title">    <%=  @event.title %>
       </h5>
-      <h5 class="card-title">    <%=  @event.uid %>
-      </h5>
       <p class="card-text">    <%=  @event.description %>
       </p>
-      <p class="card-text">       <%=  @event.start.strftime('%A, %B %d, %Y at %I:%M %p') %>
+      <p class="card-text">       <%=  @event.start_date.strftime('%A, %B %d, %Y at %I:%M %p') %>
 
       </p>
-      <p class="card-text">     <%=  @event.end.strftime('%A, %B %d, %Y at %I:%M %p') %>
+      <p class="card-text">     <%=  @event.end_date.strftime('%A, %B %d, %Y at %I:%M %p') %>
       </p>
       <p class="card-text">      <%=  @event.location %>
       </p>

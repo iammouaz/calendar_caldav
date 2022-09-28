@@ -22,8 +22,7 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @calendar = Calendar.find(event_params['calendar_id'])
-    @new_params = event_params.merge({ uid: SecureRandom.uuid })
-    @event = Event.new(@new_params)
+    @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
         format.html { redirect_to "/calendars/#{@calendar.id}", notice: 'Event was successfully created.' }
@@ -64,7 +63,7 @@ class EventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def event_params
-    params.require(:event).permit(:title, :description, :start, :end, :location, :uid, :calendar_id)
+    params.require(:event).permit(:title, :description, :start_date, :end_date, :location, :calendar_id)
   end
 
   def update_ics

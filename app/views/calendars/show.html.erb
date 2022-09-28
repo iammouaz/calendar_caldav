@@ -4,7 +4,7 @@
 
   <h1 class="my-5"> Calendar <% @calendar[:Name] %> </h1>
   <% if @events %>
-    <%= month_calendar(events: @events,attribute: :start, end_attribute: :end) do |date, events| %>
+    <%= month_calendar(events: @events,attribute: :start_date, end_attribute: :end_date) do |date, events| %>
       <div class="day">
         <%= date.strftime('%d') %>
       </div>
@@ -12,7 +12,7 @@
         <div class="border my-3">
           <div class="card-header ">
             <h6 class="card-title">
-              <% event.start.strftime('%A, %B %d, %Y at %I:%M %p') %>
+              <% event.start_date.strftime('%A, %B %d, %Y at %I:%M %p') %>
               <%= link_to event.title, "../events/#{event.id}" %>
             </h6>
           </div>
@@ -39,6 +39,7 @@
   <%end %>
   <div class="d-flex gap-5 justify-content-center align-items-center">
     <%= link_to "Create New Event", "../events/new?calendar=#{@calendar.id}" %>
+    
     <%= link_to "Download Offline ICS",  "data:text/calendar;charset=utf8,#{@ical_ics}" ,  :format => :ics %>
   </div>
   <p class="mt-5">Calendar ICS Link</p>
