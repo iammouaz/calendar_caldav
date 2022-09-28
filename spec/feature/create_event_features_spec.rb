@@ -16,6 +16,8 @@ RSpec.feature 'CreateEventFeatures', type: :feature do
     create_event(event)
 
     expect(page).to have_content('Event was successfully created.')
+
+    delete_ics(calendar.id)
   end
 
   private
@@ -34,5 +36,9 @@ RSpec.feature 'CreateEventFeatures', type: :feature do
     fill_in 'Location', with: event.location
 
     click_button 'Create Event'
+  end
+
+  def delete_ics(id)
+    File.delete("public/ics/#{id}.ics")
   end
 end

@@ -15,7 +15,6 @@ class CalendarsController < ApplicationController
     @ical_ics = @cal.generate_ical(events)
     url = request.original_url
     @str = url[0...-12]
-    update_ics
   end
 
   # GET /calendars/new
@@ -42,7 +41,6 @@ class CalendarsController < ApplicationController
 
   # PATCH/PUT /calendars/1 or /calendars/1.json
   def update
-    update_ics
     respond_to do |format|
       if @calendar.update(calendar_params)
         format.html { redirect_to calendar_url(@calendar), notice: 'Calendar was successfully updated.' }
@@ -77,11 +75,11 @@ class CalendarsController < ApplicationController
     params.require(:calendar).permit(:name, :password)
   end
 
-  def update_ics
-    events = Event.where(calendar_id: params[:id])
+  def update_ics(id)
+    events = Event.where(calendar_id: id)
     @cal = Icalendar::IcalendarService.new
     @ical_ics = @cal.generate_ical(events)
-    File.write("public/ics/#{params[:id]}.ics", @ical_ics)
+    File.write("public/ics/#{id}.ics", @ical_ics)
   end
 
   def delete_ics

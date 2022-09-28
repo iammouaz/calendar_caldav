@@ -7,6 +7,7 @@ RSpec.feature 'CreateCalendarFeatures', type: :feature do
     visit new_calendar_path
 
     create(calendar)
+
     expect(page).to have_content('Calendar was successfully created.')
   end
 
